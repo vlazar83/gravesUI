@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { Observable, catchError, of } from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { GravesApiService } from "../services/graves-api.service";
 
 @Component({
   selector: "app-grave-yard",
@@ -43,6 +45,7 @@ export class GraveYardComponent implements OnInit {
   public handleRectClick(component: any) {
     console.log("Hello Rect", component);
     console.log("Hello Grave", component.cacheProps);
+    this.getJwtToken();
   }
 
   public configImage: EventEmitter<any> = new EventEmitter();
@@ -52,7 +55,7 @@ export class GraveYardComponent implements OnInit {
     
   }
 
-  constructor() {}
+  constructor(public gravesAPI: GravesApiService, private http: HttpClient) { }
 
   ngOnInit(): void {
     const planetsImage = new Image();
@@ -63,4 +66,11 @@ export class GraveYardComponent implements OnInit {
       });
     };
   }
+
+  getJwtToken(): any {
+    this.gravesAPI.getToken().subscribe((data: {}) => {
+      console.log(data);
+    });
+  }
+
 }

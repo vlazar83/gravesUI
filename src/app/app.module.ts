@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { KonvaModule } from 'ng2-konva';
 import { AppComponent } from './app.component';
 import { GraveYardComponent } from './graveYard/graveYard.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { GraveYardComponent } from './graveYard/graveYard.component';
   ],
   imports: [
     BrowserModule,
-    KonvaModule
+    KonvaModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
