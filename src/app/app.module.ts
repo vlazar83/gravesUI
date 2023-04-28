@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { KonvaModule } from 'ng2-konva';
 import { AppComponent } from './app.component';
+import { GraveComponent } from './grave/grave.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GraveComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    KonvaModule
   ],
   providers: [],
   bootstrap: [AppComponent]
