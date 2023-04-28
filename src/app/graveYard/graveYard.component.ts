@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit } from "@angular/core";
 import { Observable, catchError, of } from "rxjs";
 import { HttpClient } from '@angular/common/http';
-import { GravesApiService } from "../services/graves-api.service";
+import { TokenApiService } from "../services/token-api.service";
 
 @Component({
   selector: "app-grave-yard",
@@ -55,7 +55,7 @@ export class GraveYardComponent implements OnInit {
     
   }
 
-  constructor(public gravesAPI: GravesApiService, private http: HttpClient) { }
+  constructor(public tokenApi: TokenApiService, private http: HttpClient) { }
 
   ngOnInit(): void {
     const planetsImage = new Image();
@@ -68,7 +68,7 @@ export class GraveYardComponent implements OnInit {
   }
 
   getJwtToken(): any {
-    this.gravesAPI.getToken().subscribe((data: {}) => {
+    this.tokenApi.getToken().subscribe((data: {}) => {
       console.log(data);
     });
   }

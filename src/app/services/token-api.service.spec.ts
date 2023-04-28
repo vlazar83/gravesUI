@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GravesApiService } from './graves-api.service';
+import { TokenApiService } from './token-api.service';
 
-describe('GravesApiService', () => {
-  let service: GravesApiService;
+describe('TokenApiService', () => {
+  let service: TokenApiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(GravesApiService);
+    service = TestBed.inject(TokenApiService);
   });
 
   it('should be created', () => {

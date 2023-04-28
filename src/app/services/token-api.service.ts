@@ -5,7 +5,7 @@ import { Observable, catchError, retry, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class GravesApiService {
+export class TokenApiService {
 
   // Define API
   apiURL = 'https://dev-sm4ylq004f4gs18a.eu.auth0.com/oauth/token';
