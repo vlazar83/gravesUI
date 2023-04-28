@@ -5,29 +5,19 @@ import { Observable, catchError, retry, throwError } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
-export class TokenApiService {
-  apiURL = "https://dev-sm4ylq004f4gs18a.eu.auth0.com/oauth/token";
+export class GravesApiService {
+  apiURL = "http://localhost:50001/graves?location=";
   constructor(private http: HttpClient) {}
 
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json; charset=UTF-8",
-      Authorization:
-        "Basic RFc4T0JBbXdZc244VWlsaEpXMzk2WFh6aUdIWU5lTHA6bmo4VUJPU1RqbXZqN0pLTndIODZqT294UHJxTXl3UkNDZE43R0NhTGhOcDI4UHZzcjh0Y1hOWmFpOFl2Q1hmeQ==",
+      Authorization: "Bearer " + localStorage.getItem("gravesAPI_JWT"),
     }),
   };
 
-  getToken(): Observable<any> {
-    return this.http
-      .post<any>(
-        this.apiURL,
-        JSON.stringify({
-          audience: "https://gravesAPI",
-          grant_type: "client_credentials",
-        }),
-        this.httpOptions
-      )
-      .pipe(retry(1), catchError(this.handleError));
+  getGraveDetails(id: any): Observable<any> {
+    return this.http.get<any>(this.apiURL + id, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
   handleError(error: any) {
