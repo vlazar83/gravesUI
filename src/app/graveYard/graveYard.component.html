@@ -5,4 +5,7 @@
   <ko-layer>
     <ko-circle [config]="configCircle" (click)="handleClick($event)"></ko-circle>
   </ko-layer>
+  <ko-layer>
+    <ko-rect *ngFor="let item of gravesConfigs" [config]="item" (click)="handleRectClick($event)"></ko-rect>
+  </ko-layer>
 </ko-stage>

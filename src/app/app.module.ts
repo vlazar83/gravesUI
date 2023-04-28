@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { KonvaModule } from 'ng2-konva';
 import { AppComponent } from './app.component';
-import { GraveComponent } from './grave/grave.component';
+import { GraveYardComponent } from './graveYard/graveYard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GraveComponent
+    GraveYardComponent
   ],
   imports: [
     BrowserModule,
