@@ -6,7 +6,7 @@ import { Observable, catchError, retry, throwError } from "rxjs";
   providedIn: "root",
 })
 export class GravesApiService {
-  apiURL = "http://localhost:50001/graves?location=";
+  apiURL = "http://localhost:50001/graves";
   constructor(private http: HttpClient) {}
 
   getGraveDetails(id: any): Observable<any> {
@@ -17,7 +17,18 @@ export class GravesApiService {
       }),
     };
 
-    return this.http.get<any>(this.apiURL + id, httpOptions).pipe(retry(1), catchError(this.handleError));
+    return this.http.get<any>(this.apiURL + "?location=" + id, httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+
+  searchForGraveByPersonName(personName: string): Observable<any> {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json; charset=UTF-8",
+        Authorization: "Bearer " + localStorage.getItem("gravesAPI_JWT"),
+      }),
+    };
+
+    return this.http.get<any>(this.apiURL + "?persons.name=" + personName, httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
   handleError(error: any) {

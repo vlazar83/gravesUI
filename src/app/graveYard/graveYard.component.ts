@@ -15,6 +15,7 @@ export class GraveYardComponent implements OnInit {
     height: window.innerHeight,
   });
 
+  searchText = "";
   gravesConfigs: Observable<any>[] = [
     of({
       x: 700,
@@ -88,5 +89,12 @@ export class GraveYardComponent implements OnInit {
         });
       }
     }
+  }
+
+  public searchClicked() {
+    this.getJwtToken();
+    this.gravesApi.searchForGraveByPersonName(this.searchText).subscribe((data: any) => {
+      console.log("response: ", data);
+    });
   }
 }
