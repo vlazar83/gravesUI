@@ -8,10 +8,13 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from "@angular/forms";
+import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
+import { GraveDetailsComponent } from "./grave-details/grave-details.component";
+import { MatListModule } from "@angular/material/list";
 
 @NgModule({
-  declarations: [AppComponent, GraveYardComponent],
+  declarations: [AppComponent, GraveYardComponent, GraveDetailsComponent],
   imports: [
     BrowserModule,
     KonvaModule,
@@ -20,7 +23,9 @@ import { FormsModule } from '@angular/forms';
     MatToolbarModule,
     MatIconModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatBottomSheetModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

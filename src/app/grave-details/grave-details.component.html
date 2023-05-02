@@ -1,0 +1,3 @@
+<p>Grave location: {{graveDetails.location}}</p>
+<p>Note on grave: {{graveDetails.note}}</p>
+<p *ngFor="let person of graveDetails.persons">{{person.name}} , {{person.bornDate}} - {{person.deathDate}}</p>

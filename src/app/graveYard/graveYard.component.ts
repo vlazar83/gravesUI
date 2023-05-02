@@ -1,8 +1,13 @@
-import { Component, EventEmitter, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit, ViewChild } from "@angular/core";
 import { Observable, catchError, of } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { TokenApiService } from "../services/token-api.service";
 import { GravesApiService } from "../services/graves-api.service";
+import { MatBottomSheet } from "@angular/material/bottom-sheet";
+import { GraveDetailsComponent } from "../grave-details/grave-details.component";
+import { DataService } from "../services/data.service";
+import { GraveDetails } from "../model/model";
+
 
 @Component({
   selector: "app-grave-yard",
@@ -50,6 +55,13 @@ export class GraveYardComponent implements OnInit {
     this.getJwtToken();
     this.gravesApi.getGraveDetails(component.cacheProps.location).subscribe((data: any) => {
       console.log("response: ", data);
+
+      let graveDetails : GraveDetails = {location: '', note: '', persons: []};
+      graveDetails.location = data[0].location;
+      graveDetails.note = data[0].note;
+      graveDetails.persons = data[0].persons;
+      this.dataService.changeGraveDetails(graveDetails);
+      this.openBottomSheet();
     });
   }
 
@@ -59,7 +71,12 @@ export class GraveYardComponent implements OnInit {
     console.log("Hello Circle", component);
   }
 
-  constructor(public gravesApi: GravesApiService, public tokenApi: TokenApiService, private http: HttpClient) {}
+  constructor(private dataService: DataService, private _bottomSheet: MatBottomSheet, public gravesApi: GravesApiService, public tokenApi: TokenApiService, private http: HttpClient) {}
+
+  openBottomSheet(): void {
+    this._bottomSheet.open(GraveDetailsComponent);
+  }
+
 
   ngOnInit(): void {
     const planetsImage = new Image();
