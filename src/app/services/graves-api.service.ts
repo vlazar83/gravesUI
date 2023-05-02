@@ -9,15 +9,15 @@ export class GravesApiService {
   apiURL = "http://localhost:50001/graves?location=";
   constructor(private http: HttpClient) {}
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      "Content-Type": "application/json; charset=UTF-8",
-      Authorization: "Bearer " + localStorage.getItem("gravesAPI_JWT"),
-    }),
-  };
-
   getGraveDetails(id: any): Observable<any> {
-    return this.http.get<any>(this.apiURL + id, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+    var httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json; charset=UTF-8",
+        Authorization: "Bearer " + localStorage.getItem("gravesAPI_JWT"),
+      }),
+    };
+
+    return this.http.get<any>(this.apiURL + id, httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
   handleError(error: any) {
