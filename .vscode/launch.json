@@ -10,6 +10,21 @@
       "url": "http://localhost:4200/"
     },
     {
+      "name": "ng serve",
+      "type": "chrome",
+      "request": "launch",
+      "preLaunchTask": "debugproj",
+      "url": "http://localhost:4200/",
+      "webRoot": "${workspaceFolder}",
+      "sourceMapPathOverrides": {
+        "webpack:/*": "${webRoot}/*",
+        "/./*": "${webRoot}/*",
+        "/src/*": "${webRoot}/*",
+        "/*": "*",
+        "/./~/*": "${webRoot}/node_modules/*"
+      }
+    },
+    {
       "name": "ng test",
       "type": "chrome",
       "request": "launch",
