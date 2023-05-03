@@ -1,24 +1,62 @@
-import { Component, OnInit } from '@angular/core';
-import { TokenApiService } from '../services/token-api.service';
-import { GravesApiService } from '../services/graves-api.service';
+import { Component, OnInit } from "@angular/core";
+import { TokenApiService } from "../services/token-api.service";
+import { GravesApiService } from "../services/graves-api.service";
+import { DataService } from "../services/data.service";
+import { GraveDetails } from "../model/model";
+
+export interface GraveListElement {
+  location: string;
+  note: string;
+  person: string;
+  bornDate: string;
+  deathDate: string;
+}
 
 @Component({
-  selector: 'app-search-panel',
-  templateUrl: './search-panel.component.html',
-  styleUrls: ['./search-panel.component.css']
+  selector: "app-search-panel",
+  templateUrl: "./search-panel.component.html",
+  styleUrls: ["./search-panel.component.css"],
 })
 export class SearchPanelComponent implements OnInit {
+  displayedColumns: string[] = ["location", "note", "person", "bornDate", "deathDate"];
+
+  graveList: GraveListElement[] = [];
+
   panelOpenState = true;
   searchText = "";
-  constructor(public gravesApi: GravesApiService, public tokenApi: TokenApiService) { }
+  constructor(private dataService: DataService, public gravesApi: GravesApiService, public tokenApi: TokenApiService) {}
 
   ngOnInit(): void {
+    // this.dataService.currentGraveSearchResult$.subscribe((message) => (this.graveList = message));
   }
 
   public searchClicked() {
     this.getJwtToken();
     this.gravesApi.searchForGraveByPersonName(this.searchText).subscribe((data: any) => {
       console.log("response: ", data);
+
+      var newGraveListElements: GraveListElement[] = [];
+      this.graveList = [];
+      data.forEach((element: any) => {
+        var newGraveListElement: GraveListElement = {
+          location: "",
+          note: "",
+          person: "",
+          bornDate: "",
+          deathDate: "",
+        };
+
+        newGraveListElement.location = element.location;
+        newGraveListElement.note = element.note;
+        element.persons.forEach((personElement: any) => {
+          newGraveListElement.person = personElement.name;
+          newGraveListElement.bornDate = personElement.bornDate;
+          newGraveListElement.deathDate = personElement.deathDate;
+          newGraveListElements.push(newGraveListElement);
+        });
+
+        this.graveList = [...newGraveListElements];
+      });
     });
   }
 
@@ -41,5 +79,4 @@ export class SearchPanelComponent implements OnInit {
       }
     }
   }
-
 }

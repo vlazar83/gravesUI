@@ -12,8 +12,9 @@ import { FormsModule } from "@angular/forms";
 import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
 import { GraveDetailsComponent } from "./grave-details/grave-details.component";
 import { MatListModule } from "@angular/material/list";
-import {MatExpansionModule} from '@angular/material/expansion';
-import { SearchPanelComponent } from './search-panel/search-panel.component'; 
+import { MatExpansionModule } from "@angular/material/expansion";
+import { SearchPanelComponent } from "./search-panel/search-panel.component";
+import { MatTableModule } from "@angular/material/table";
 
 @NgModule({
   declarations: [AppComponent, GraveYardComponent, GraveDetailsComponent, SearchPanelComponent],
@@ -28,7 +29,8 @@ import { SearchPanelComponent } from './search-panel/search-panel.component';
     FormsModule,
     MatBottomSheetModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent],
