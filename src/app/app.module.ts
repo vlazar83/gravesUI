@@ -12,9 +12,11 @@ import { FormsModule } from "@angular/forms";
 import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
 import { GraveDetailsComponent } from "./grave-details/grave-details.component";
 import { MatListModule } from "@angular/material/list";
+import {MatExpansionModule} from '@angular/material/expansion';
+import { SearchPanelComponent } from './search-panel/search-panel.component'; 
 
 @NgModule({
-  declarations: [AppComponent, GraveYardComponent, GraveDetailsComponent],
+  declarations: [AppComponent, GraveYardComponent, GraveDetailsComponent, SearchPanelComponent],
   imports: [
     BrowserModule,
     KonvaModule,
@@ -26,6 +28,7 @@ import { MatListModule } from "@angular/material/list";
     FormsModule,
     MatBottomSheetModule,
     MatListModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent],
