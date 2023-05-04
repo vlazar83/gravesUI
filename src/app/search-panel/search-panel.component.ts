@@ -38,17 +38,18 @@ export class SearchPanelComponent implements OnInit {
       var newGraveListElements: GraveListElement[] = [];
       this.graveList = [];
       data.forEach((element: any) => {
-        var newGraveListElement: GraveListElement = {
-          location: "",
-          note: "",
-          person: "",
-          bornDate: "",
-          deathDate: "",
-        };
 
-        newGraveListElement.location = element.location;
-        newGraveListElement.note = element.note;
         element.persons.forEach((personElement: any) => {
+          var newGraveListElement: GraveListElement = {
+            location: "",
+            note: "",
+            person: "",
+            bornDate: "",
+            deathDate: "",
+          };
+  
+          newGraveListElement.location = element.location;
+          newGraveListElement.note = element.note;
           newGraveListElement.person = personElement.name;
           newGraveListElement.bornDate = personElement.bornDate;
           newGraveListElement.deathDate = personElement.deathDate;
