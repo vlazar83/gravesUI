@@ -15,11 +15,4 @@ export class DataService {
     this.graveDetails.next(graveDetails);
   }
 
-  private graveSearchResult = new BehaviorSubject<GraveDetails[]>([{location: '', note: '', persons: []}]);
-  currentGraveSearchResult$ = this.graveSearchResult.asObservable();
-
-  changeGraveSearchResult(result: GraveDetails[]){
-    this.graveSearchResult.next(result);
-  }
-
 }

@@ -15,6 +15,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { SearchPanelComponent } from "./search-panel/search-panel.component";
 import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 @NgModule({
   declarations: [AppComponent, GraveYardComponent, GraveDetailsComponent, SearchPanelComponent],
@@ -30,7 +31,8 @@ import { MatTableModule } from "@angular/material/table";
     MatBottomSheetModule,
     MatListModule,
     MatExpansionModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent],

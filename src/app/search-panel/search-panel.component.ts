@@ -1,8 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { TokenApiService } from "../services/token-api.service";
 import { GravesApiService } from "../services/graves-api.service";
 import { DataService } from "../services/data.service";
 import { GraveDetails } from "../model/model";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
 
 export interface GraveListElement {
   location: string;
@@ -17,17 +19,21 @@ export interface GraveListElement {
   templateUrl: "./search-panel.component.html",
   styleUrls: ["./search-panel.component.css"],
 })
-export class SearchPanelComponent implements OnInit {
-  displayedColumns: string[] = ["location", "note", "person", "bornDate", "deathDate"];
+export class SearchPanelComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  graveList: GraveListElement[] = [];
+  ngAfterViewInit() {
+    this.graveList.paginator = this.paginator;
+  }
+
+  displayedColumns: string[] = ["location", "note", "person", "bornDate", "deathDate"];
+  graveList = new MatTableDataSource<GraveListElement>();
 
   panelOpenState = true;
   searchText = "";
-  constructor(private dataService: DataService, public gravesApi: GravesApiService, public tokenApi: TokenApiService) {}
+  constructor(public gravesApi: GravesApiService, public tokenApi: TokenApiService) {}
 
   ngOnInit(): void {
-    // this.dataService.currentGraveSearchResult$.subscribe((message) => (this.graveList = message));
   }
 
   public searchClicked() {
@@ -36,7 +42,7 @@ export class SearchPanelComponent implements OnInit {
       console.log("response: ", data);
 
       var newGraveListElements: GraveListElement[] = [];
-      this.graveList = [];
+      this.graveList.data = [];
       data.forEach((element: any) => {
 
         element.persons.forEach((personElement: any) => {
@@ -56,7 +62,7 @@ export class SearchPanelComponent implements OnInit {
           newGraveListElements.push(newGraveListElement);
         });
 
-        this.graveList = [...newGraveListElements];
+        this.graveList.data = [...newGraveListElements];
       });
     });
   }
